@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Bot Panel Pterodactyl</title>
+<style>
+  body{margin:0;font-family:'Segoe UI',sans-serif;background:#000428;background:linear-gradient(to right,#000428,#004e92);color:#fff}
+  .card{max-width:420px;margin:8vh auto;padding:32px;background:rgba(255,255,255,.08);border-radius:16px;box-shadow:0 0 24px rgba(0,255,255,.25);animation:float 4s ease-in-out infinite}
+  h2{text-align:center;margin:18px 0}
+  input,button{width:100%;padding:12px;margin:8px 0;border:none;border-radius:8px}
+  button{background:#00ffff;font-weight:bold;cursor:pointer}
+  .hidden{display:none}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  .bot{display:block;margin:0 auto 12px;width:96px;animation:blink 2s infinite}
+  @keyframes blink{0%,100%{filter:brightness(1)}50%{filter:brightness(1.6)}}
+</style>
+</head>
+<body>
+<div id="login" class="card">
+  <img src="https://cdn-icons-png.flaticon.com/512/4712/4712037.png" alt="Bot" class="bot">
+  <h2>Login Bot Panel</h2>
+  <input id="u" placeholder="Username">
+  <input id="p" type="password" placeholder="Password">
+  <button onclick="login()">Masuk</button>
+  <p id="err" style="color:#ff4d4f;text-align:center"></p>
+</div>
+
+<div id="panel" class="card hidden">
+  <h2>🤖 Buat Server</h2>
+  <input id="sName" placeholder="Nama Server">
+  <input id="mem"  placeholder="RAM (MB) contoh: 1024">
+  <button onclick="buatPanel()">Buat Sekarang</button>
+  <p id="ok" style="text-align:center"></p>
+</div>
+
+<script>
+const userOK="resming", passOK="buyresellerpaneldulu";
+
+function login(){
+  const e=document; if(e.getElementById('u').value===userOK&&e.getElementById('p').value===passOK){
+    e.getElementById('login').classList.add('hidden');
+    e.getElementById('panel').classList.remove('hidden');
+  }else{e.getElementById('err').textContent="Username / Password salah!";}
+}
+
+async function buatPanel(){
+  const e=document, name=e.getElementById('sName').value.trim(),
+        ram=parseInt(e.getElementById('mem').value||0,10);
+  if(!name||!ram){e.getElementById('ok').textContent="Lengkapi nama & RAM.";return;}
+
+  e.getElementById('ok').textContent="Memproses…";
+  try{
+    const res=await fetch('/api/create-panel',{method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({name,ram})});
+    const data=await res.json();
+    e.getElementById('ok').textContent=data.success?
+      `✅ Server berhasil dibuat (ID: ${data.identifier})`:
+      `❌ Gagal: ${data.error||'Unknown'}`;
+  }catch(err){
+    e.getElementById('ok').textContent="❌ Gagal koneksi backend.";
+  }
+}
+</script>
+</body>
+</html>
