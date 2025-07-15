@@ -30,17 +30,17 @@ export default async function handler(req, res) {
     BUILD_NUMBER: 'latest',
   },
   limits: {
-    memory: ram,
-    swap: 1,
-    disk: 10240,
-    io: 500,
-    cpu: 0,
-    backups: 1 // ✅ ini yang sebelumnya hilang
-  },
-  feature_limits: {
-    databases: 1,
-    allocations: 1
-  },
+  memory: ram,
+  swap: 1,
+  disk: 10240,
+  io: 500,
+  cpu: 0
+},
+feature_limits: {
+  databases: 1,
+  allocations: 1,
+  backups: 1 // ✅ Harusnya di sini
+},
   allocation: {
     default: parseInt(PTERO_ALLOC_ID, 10)
   }
