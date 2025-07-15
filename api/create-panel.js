@@ -42,7 +42,7 @@ feature_limits: {
   backups: 1 // ✅ Harusnya di sini
 },
   allocation: {
-    default: parseInt(PTERO_ALLOC_ID, 10)
+    default: parseInt(PTERO_ALLOC_ID, 1)
   }
 };
   
