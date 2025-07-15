@@ -20,17 +20,32 @@ export default async function handler(req, res) {
 
   // Payload API
   const payload = {
-    name,
-    user: parseInt(PTERO_USER_ID, 10),
-    egg:  parseInt(PTERO_EGG_ID, 10),
-    docker_image: "ghcr.io/pterodactyl/yolks:java_17",
-    startup: "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar server.jar",
-    environment: { SERVER_JARFILE: "server.jar", BUILD_NUMBER: "latest" },
-    limits: { memory: ram, swap: -1, disk: 10240, io: 500, cpu: 0 },
-    feature_limits: { databases: 1, allocations: 1 },
-    allocation: { default: parseInt(PTERO_ALLOC_ID, 10) }
-  };
-
+  name,
+  user: parseInt(PTERO_USER_ID, 10),
+  egg: parseInt(PTERO_EGG_ID, 10),
+  docker_image: 'ghcr.io/pterodactyl/yolks:java_17',
+  startup: 'java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar server.jar',
+  environment: {
+    SERVER_JARFILE: 'server.jar',
+    BUILD_NUMBER: 'latest',
+  },
+  limits: {
+    memory: ram,
+    swap: 1,
+    disk: 10240,
+    io: 500,
+    cpu: 0,
+    backups: 1 // ✅ ini yang sebelumnya hilang
+  },
+  feature_limits: {
+    databases: 1,
+    allocations: 1
+  },
+  allocation: {
+    default: parseInt(PTERO_ALLOC_ID, 10)
+  }
+};
+  
   try{
     const response = await fetch(`${PTERO_URL}/api/application/servers`, {
       method:'POST',
