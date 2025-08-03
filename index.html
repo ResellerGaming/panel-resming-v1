@@ -166,9 +166,10 @@ async function login() {
 
   const conf = hargaPaket[paket];
 
+async function buatPanel(username, paket, idtrx) {
   const res = await fetch(`https://api.nvidiabotz.xyz/pterodactyl/addpanel?domain=https://dieeonlypanelprivate.syahxmasvill.my.id&plta=ptla_6Hpfz7XEq95YHuXcCuhbOmjgU0kzXXIaJIaBMnynpdy&username=${username}&disk=${conf.disk}&cpu=${conf.cpu}`);
   const data = await res.json();
-
+  
   document.getElementById('step1').classList.add('hidden');
   document.getElementById('step2').classList.remove('hidden');
 
