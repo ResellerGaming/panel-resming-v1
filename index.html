@@ -1,68 +1,168 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Bot Panel Pterodactyl</title>
-<style>
-  body{margin:0;font-family:'Segoe UI',sans-serif;background:#000428;background:linear-gradient(to right,#000428,#004e92);color:#fff}
-  .card{max-width:420px;margin:8vh auto;padding:32px;background:rgba(255,255,255,.08);border-radius:16px;box-shadow:0 0 24px rgba(0,255,255,.25);animation:float 4s ease-in-out infinite}
-  h2{text-align:center;margin:18px 0}
-  input,button{width:100%;padding:12px;margin:8px 0;border:none;border-radius:8px}
-  button{background:#00ffff;font-weight:bold;cursor:pointer}
-  .hidden{display:none}
-  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-  .bot{display:block;margin:0 auto 12px;width:96px;animation:blink 2s infinite}
-  @keyframes blink{0%,100%{filter:brightness(1)}50%{filter:brightness(1.6)}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login Panel Bot Gaming</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: #111;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+      max-width: 460px;
+      width: 95%;
+      animation: fadeIn 0.5s ease;
+    }
+    h2, h3 {
+      text-align: center;
+      color: #ff073a;
+      text-shadow: 0 0 10px #ff073a;
+      margin-bottom: 20px;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 6px;
+      color: #ccc;
+    }
+    input, select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 16px;
+      border: 2px solid #ff073a;
+      border-radius: 10px;
+      background: #000;
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+      transition: 0.3s;
+    }
+    input:focus, select:focus {
+      box-shadow: 0 0 12px #ff073a;
+    }
+    button {
+      width: 100%;
+      background: #ff073a;
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 17px;
+      cursor: pointer;
+      box-shadow: 0 0 12px #ff073a;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #ff304f;
+      box-shadow: 0 0 20px #ff073a;
+    }
+    .hidden { display: none; }
+    .info-box {
+      background: #1c1c1c;
+      border: 1px solid #ff073a;
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 14px;
+      color: #ccc;
+    }
+    img.chibi-bot {
+      width: 90px;
+      display: block;
+      margin: 0 auto 15px;
+      filter: drop-shadow(0 0 6px #ff073a);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
 </head>
 <body>
-<div id="login" class="card">
-  <img src="https://cdn-icons-png.flaticon.com/512/4712/4712037.png" alt="Bot" class="bot">
-  <h2>Login Bot Panel</h2>
-  <input id="u" placeholder="Username">
-  <input id="p" type="password" placeholder="Password">
-  <button onclick="login()">Masuk</button>
-  <p id="err" style="color:#ff4d4f;text-align:center"></p>
-</div>
+<audio autoplay loop>
+  <source src="https://files.catbox.moe/gnks6b.mp3" type="audio/mp3">
+</audio>
 
-<div id="panel" class="card hidden">
-  <h2>🤖 Buat Server</h2>
-  <input id="sName" placeholder="Nama Server">
-  <input id="mem"  placeholder="RAM (MB) contoh: 1024">
-  <button onclick="buatPanel()">Buat Sekarang</button>
-  <p id="ok" style="text-align:center"></p>
+<div class="container">
+  <img src="https://cdn-icons-png.flaticon.com/512/4712/4712100.png" alt="Chibi Bot" class="chibi-bot">
+  <h2>Reseller Panel</h2>
+  <h2>by Reseller Gaming</h2>
+  <p>https://t.me/ResellerGamingoffcial</p>
+
+  <!-- Step 1: Login -->
+  <div id="step1">
+    <label>Username:</label>
+    <input type="text" id="username" placeholder="Masukkan username kamu" required>
+
+    <label>Password:</label>
+    <input type="password" id="password" placeholder="Masukkan password..." required>
+
+    <label>Pilih Paket RAM:</label>
+    <select id="paket">
+      <option value="">-- Pilih Paket --</option>
+      <option value="1gb">1GB</option>
+      <option value="2gb">2GB</option>
+      <option value="3gb">3GB</option>
+      <option value="unli">Unlimited</option>
+    </select>
+
+    <button onclick="login()">Login & Buat Panel</button>
+  </div>
+
+  <!-- Step 2: Sukses -->
+  <div id="step2" class="hidden">
+    <h3>Panel Siap Digunakan!</h3>
+    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712100.png" class="chibi-bot" />
+    <div class="info-box">
+      <p><b>Email:</b> <span id="email"></span></p>
+      <p><b>Username:</b> <span id="uname"></span></p>
+      <p><b>Password:</b> <span id="pass"></span></p>
+      <p><b>Link Login:</b> <a href="https://dieeonlypanelprivate.syahxmasvill.my.id" target="_blank" style="color:#ff073a;">Klik di sini</a></p>
+      <p><b>Paket RAM:</b> <span id="ram"></span></p>
+    </div>
+  </div>
 </div>
 
 <script>
-const userOK="resming", passOK="buyresellerpaneldulu";
+const hargaPaket = {
+  "1gb": { ram: 1000, disk: 1000, cpu: 40 },
+  "2gb": { ram: 2000, disk: 1000, cpu: 60 },
+  "3gb": { ram: 3000, disk: 2000, cpu: 80 },
+  "unli": { ram: 0, disk: 0, cpu: 0 }
+};
 
-function login(){
-  const e=document; if(e.getElementById('u').value===userOK&&e.getElementById('p').value===passOK){
-    e.getElementById('login').classList.add('hidden');
-    e.getElementById('panel').classList.remove('hidden');
-  }else{e.getElementById('err').textContent="Username / Password salah!";}
-}
+async function login() {
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value.trim();
+  const paket = document.getElementById('paket').value;
 
-async function buatPanel(){
-  const e=document, name=e.getElementById('sName').value.trim(),
-        ram=parseInt(e.getElementById('mem').value||0,10);
-  if(!name||!ram){e.getElementById('ok').textContent="Lengkapi nama & RAM.";return;}
+  if (!username || !password || !paket) return alert('Isi semua data terlebih dahulu!');
+  if (password !== 'buyresellerpaneldulu') return alert('Password salah!');
 
-  e.getElementById('ok').textContent="Memproses…";
-  try{
-    const res=await fetch('/api/create-panel',{method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({name,ram})});
-    const data=await res.json();
-    e.getElementById('ok').textContent=data.success?
-      `✅ Server berhasil dibuat (ID: ${data.identifier})`:
-      `❌ Gagal: ${data.error||'Unknown'}`;
-  }catch(err){
-    e.getElementById('ok').textContent="❌ Gagal koneksi backend.";
-  }
+  const conf = hargaPaket[paket];
+
+  const res = await fetch(`https://api.nvidiabotz.xyz/pterodactyl/addpanel?domain=https://dieeonlypanelprivate.syahxmasvill.my.id&plta=ptla_6Hpfz7XEq95YHuXcCuhbOmjgU0kzXXIaJIaBMnynpdy&username=${username}&disk=${conf.disk}&cpu=${conf.cpu}`);
+  const data = await res.json();
+
+  document.getElementById('step1').classList.add('hidden');
+  document.getElementById('step2').classList.remove('hidden');
+
+  document.getElementById('email').innerText = data.user.attributes.email;
+  document.getElementById('uname').innerText = data.user.attributes.username;
+  document.getElementById('pass').innerText = data.user.attributes.username;
+  document.getElementById('ram').innerText = paket.toUpperCase();
 }
 </script>
 </body>
-</html>
+        </html>
