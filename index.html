@@ -162,11 +162,11 @@ async function login() {
   const paket = document.getElementById('paket').value;
 
   if (!username || !password || !paket) return alert('Isi semua data terlebih dahulu!');
-  if (password !== 'buyresellerpanelbyresellergaming') return alert('Password salah!');
+  if (password !== 'buyresellerpanelv1byresellergaming') return alert('Password salah!');
 
   const conf = hargaPaket[paket];
 
-  const res = await fetch(`https://api.nvidiabotz.xyz/pterodactyl/addpanel?domain=https://rgxpt.resellergaming.my.id&plta=ptla_5uomPl4swKVX3IFLzExXo1FKhq09E1QbLhSZTJCumAI&username=${username}&disk=${conf.disk}&cpu=${conf.cpu}`);
+  const res = await fetch(`https://api.nvidiabotz.xyz/pterodactyl/addpanel?domain=https://salandpanel.vhon-offcial.biz.id&plta=ptla_jowvA3rBS4Oefzp3ZLDXIcYbv7F6qN7G6L5g7C7fzhE&username=${username}&disk=${conf.disk}&cpu=${conf.cpu}`)`);
   const data = await res.json();
   
   document.getElementById('step1').classList.add('hidden');
